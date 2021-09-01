@@ -14,13 +14,13 @@ const getColor = async (streamer) => {
     const selector = '.ScAccentRegionCssVars-sc-viq0je-0'
     await page.waitForSelector(selector)
 
-    const colorData = await page.evaluate(() => {
+    const colorData = await page.evaluate((selector) => {
       const color = getComputedStyle(
         document.querySelector(selector)
       ).getPropertyValue('--color-accent')
 
       return color
-    })
+    }, selector)
     browser.close()
     return colorData
   } catch (error) {
